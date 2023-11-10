@@ -23,6 +23,8 @@ import { TransformInterceptor } from './core/interceptors';
 import { DatabaseModule } from './database/database.module';
 import { BootstrapModule } from './bootstrap/bootstrap.module';
 import { LoggerModule } from './logger/logger.module';
+import { EmailTemplateModule } from './email-template/email-template.module';
+import { PasswordResetModule } from './password-reset/password-reset.module';
 
 @Module({
   imports: [
@@ -50,6 +52,8 @@ import { LoggerModule } from './logger/logger.module';
     DatabaseModule,
     BootstrapModule,
     LoggerModule,
+    EmailTemplateModule,
+    PasswordResetModule,
   ],
   controllers: [AppController],
   providers: [

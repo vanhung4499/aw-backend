@@ -13,11 +13,10 @@ import {
 import { JwtPayload, sign, verify } from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
 import * as moment from 'moment';
-import { ALPHA_NUMERIC_CODE_LENGTH } from './../constants';
+import { ALPHA_NUMERIC_CODE_LENGTH } from '../common/';
 import { EmailService } from '../email/email.service';
 import { UserService } from '../user/user.service';
-import { RequestContext } from './../core/context';
-import { generateRandomAlphaNumericCode } from '../core';
+import { RequestContext, generateRandomAlphaNumericCode } from '../core';
 
 @Injectable()
 export class EmailConfirmationService {
@@ -30,6 +29,7 @@ export class EmailConfirmationService {
    * Send confirmation email link & code
    *
    * @param user
+   * @param integration
    * @returns
    */
   public async sendEmailVerification(
@@ -161,20 +161,18 @@ export class EmailConfirmationService {
     payload: IUserEmailInput & IUserCodeInput & IBaseEntityModel,
   ): Promise<IUser> {
     try {
-      const { email, code, tenantId } = payload;
+      const { email, code } = payload;
       if (email && code) {
         const user = await this.userService.findOneByOptions({
           where: [
             {
               email,
               code,
-              tenantId,
               codeExpireAt: MoreThanOrEqual(new Date()),
             },
             {
               email,
               code,
-              tenantId,
               codeExpireAt: IsNull(),
             },
           ],

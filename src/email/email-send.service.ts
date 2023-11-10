@@ -1,20 +1,10 @@
-import {
-  BadRequestException,
-  Injectable,
-  InternalServerErrorException,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IsNull, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import * as Email from 'email-templates';
-import { ISMTPConfig, isEmpty } from '../common';
-import {
-  IBasePerTenantAndOrganizationEntityModel,
-  IVerifySMTPTransport,
-} from '../models';
-import { CustomSmtp, EmailTemplate } from './../core/entities';
-import { RequestContext } from "../core";
-import { CustomSmtpService } from './../custom-smtp/custom-smtp.service';
+import { ISMTPConfig } from '../common';
+import { IVerifySMTPTransport } from '../models';
+import { EmailTemplate } from './../core/entities';
 import { SMTPUtils } from './utils';
 import { EmailTemplateRenderService } from './email-template-render.service';
 
@@ -24,7 +14,6 @@ export class EmailSendService {
     @InjectRepository(EmailTemplate)
     protected readonly emailTemplateRepository: Repository<EmailTemplate>,
 
-    private readonly customSmtpService: CustomSmtpService,
     private readonly emailTemplateRenderService: EmailTemplateRenderService,
   ) {}
 
@@ -61,7 +50,7 @@ export class EmailSendService {
   private getEmailConfig(smtpConfig: ISMTPConfig): Email<any> {
     const config: Email.EmailConfig<any> = {
       message: {
-        from: smtpConfig.fromAddress || 'noreply@gauzy.co',
+        from: smtpConfig.fromAddress || 'noreply@aw.co',
       },
       // if you want to send emails in development or test environments, set options.send to true.
       send: true,
@@ -74,17 +63,6 @@ export class EmailSendService {
       },
       render: this.emailTemplateRenderService.render,
     };
-    /**
-     * TODO: uncomment this after we figure out issues with dev / prod in the environment.*.ts
-     */
-    // if (!environment.production && !environment.demo) {
-    //     config.preview = {
-    //         open: {
-    //             app: 'firefox',
-    //             wait: false
-    //         }
-    //     };
-    // }
     return new Email(config);
   }
 }

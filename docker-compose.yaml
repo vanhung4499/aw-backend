@@ -33,13 +33,13 @@ services:
       - overlay
 
   db:
-    image: postgres:15-alpine
+    image: postgres:14-alpine
     container_name: db
     restart: always
     environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME:-aw}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASS:-root}
     healthcheck:
       test:
         [

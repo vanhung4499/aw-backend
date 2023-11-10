@@ -29,6 +29,7 @@ export enum PermissionsEnum {
   ACCESS_DELETE_ALL_DATA = 'ACCESS_DELETE_ALL_DATA',
   FILE_STORAGE_VIEW = 'FILE_STORAGE_VIEW',
   ACCESS_DELETE_ACCOUNT = 'ACCESS_DELETE_ACCOUNT',
+  VIEW_ALL_EMAIL_TEMPLATES = 'VIEW_ALL_EMAIL_TEMPLATES',
 }
 
 export const PermissionGroups = {
@@ -47,5 +48,6 @@ export const PermissionGroups = {
     PermissionsEnum.CHANGE_ROLES_PERMISSIONS,
     PermissionsEnum.FILE_STORAGE_VIEW,
     PermissionsEnum.ADMIN_EDIT,
+    PermissionsEnum.VIEW_ALL_EMAIL_TEMPLATES,
   ],
 };

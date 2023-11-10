@@ -19,6 +19,8 @@ export interface IUser extends IBaseEntityModel, IRelationalImageAsset {
   hash?: string;
   imageUrl?: string;
   fullName?: string;
+  code?: string;
+  codeExpireAt?: Date;
   emailVerifiedAt?: Date;
   isEmailVerified?: boolean;
   emailToken?: string;
@@ -40,6 +42,7 @@ export interface IUserRegistrationInput {
   user: IUser;
   password?: string;
   confirmPassword?: string;
+  originalUrl?: string;
 }
 
 /**
@@ -59,6 +62,10 @@ export interface IUserPasswordInput {
 
 export interface IUserTokenInput {
   token: string;
+}
+
+export interface IUserCodeInput {
+  code: string;
 }
 
 export interface IUserLoginInput extends IUserEmailInput, IUserPasswordInput {}
