@@ -42,7 +42,6 @@ export interface IUserRegistrationInput {
   user: IUser;
   password?: string;
   confirmPassword?: string;
-  originalUrl?: string;
 }
 
 /**

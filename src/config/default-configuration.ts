@@ -5,7 +5,7 @@ import {
   DEFAULT_API_HOST,
   DEFAULT_API_PORT,
   DEFAULT_API_BASE_URL,
-  IPluginConfig,
+  IConfig,
 } from '../common';
 import * as path from 'path';
 import { dbConnectionConfig } from './database';
@@ -44,7 +44,7 @@ console.log('Default Config -> assetPublicPath: ' + assetPublicPath);
 /**
  * The default configurations.
  */
-export const defaultConfiguration: IPluginConfig = {
+export const defaultConfiguration: IConfig = {
   apiConfigOptions: {
     host: process.env.API_HOST || DEFAULT_API_HOST,
     port: process.env.API_PORT || DEFAULT_API_PORT,
@@ -54,7 +54,6 @@ export const defaultConfiguration: IPluginConfig = {
   dbConnectionOptions: {
     ...dbConnectionConfig,
   },
-  plugins: [],
   authOptions: {
     expressSessionSecret: process.env.EXPRESS_SESSION_SECRET || 'aw',
     userPasswordBcryptSaltRounds: 12,

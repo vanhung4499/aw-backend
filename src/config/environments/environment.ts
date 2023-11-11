@@ -67,7 +67,7 @@ export const environment: IEnvironment = {
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
-    secure: process.env.CLOUDINARY_API_SECURE === 'false' ? false : true,
+    secure: process.env.CLOUDINARY_API_SECURE !== 'false',
     delivery_url:
       process.env.CLOUDINARY_CDN_URL || `https://res.cloudinary.com`,
   },
@@ -83,7 +83,7 @@ export const environment: IEnvironment = {
   smtpConfig: {
     host: process.env.MAIL_HOST,
     port: parseInt(process.env.MAIL_PORT, 10),
-    secure: process.env.MAIL_PORT === '465' ? true : false, // true for 465, false for other ports
+    secure: process.env.MAIL_PORT === '465', // true for 465, false for other ports
     auth: {
       user: process.env.MAIL_USERNAME,
       pass: process.env.MAIL_PASSWORD,

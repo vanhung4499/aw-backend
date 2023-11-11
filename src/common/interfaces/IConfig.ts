@@ -1,5 +1,4 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { DynamicModule, Type } from '@nestjs/common';
 import { ILogger } from './ILogger';
 
 export interface IAssetOptions {
@@ -25,12 +24,10 @@ export interface IAuthOptions {
   jwtSecret: string;
 }
 
-export interface IPluginConfig {
+export interface IConfig {
   apiConfigOptions: IApiServerOptions;
 
   dbConnectionOptions: TypeOrmModuleOptions;
-
-  plugins?: Array<DynamicModule | Type<any>>;
 
   logger?: ILogger;
 

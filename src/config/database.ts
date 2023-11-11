@@ -1,7 +1,5 @@
-import * as path from 'path';
-import chalk from 'chalk';
+import * as chalk from 'chalk';
 import { TlsOptions } from 'tls';
-import { DataSourceOptions } from 'typeorm';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
@@ -23,6 +21,9 @@ let connectionConfig: TypeOrmModuleOptions;
 switch (dbType) {
   case 'mongodb':
     throw 'MongoDB not supported yet';
+
+  case 'mysql':
+    throw 'MySQL not supported yet';
 
   case 'postgres':
     const ssl = process.env.DB_SSL_MODE === 'true' ? true : undefined;
@@ -50,7 +51,7 @@ switch (dbType) {
       port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 5432,
       logging: 'all',
       logger: 'file', // Removes console logging, instead logs all queries in a file ormlogs.log
-      synchronize: process.env.DB_SYNCHRONIZE === 'true' ? true : false, // We are using migrations, synchronize should be set to false.
+      synchronize: process.env.DB_SYNCHRONIZE === 'true', // If e using migrations, synchronize should be set to false.
       uuidExtension: 'pgcrypto',
       migrations: ['src/modules/not-exists/*.migration{.ts,.js}'],
       entities: ['src/modules/not-exists/*.entity{.ts,.js}'],

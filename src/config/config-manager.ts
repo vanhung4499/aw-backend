@@ -1,13 +1,13 @@
-import { deepMerge, IPluginConfig } from '../common';
+import { deepMerge, IConfig } from '../common';
 import { defaultConfiguration } from './default-configuration';
 
-let defaultConfig: IPluginConfig = defaultConfiguration;
+let defaultConfig: IConfig = defaultConfiguration;
 
 /**
  * Override the default config by merging in the provided values.
  *
  */
-export function setConfig(providedConfig: Partial<IPluginConfig>): void {
+export function setConfig(providedConfig: Partial<IConfig>): void {
   defaultConfig = deepMerge(defaultConfig, providedConfig);
 }
 
@@ -16,6 +16,6 @@ export function setConfig(providedConfig: Partial<IPluginConfig>): void {
  * Returns the app bootstrap config object.
  *
  */
-export function getConfig(): Readonly<IPluginConfig> {
+export function getConfig(): Readonly<IConfig> {
   return defaultConfig;
 }
