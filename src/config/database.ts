@@ -47,7 +47,7 @@ switch (dbType) {
       host: process.env.DB_HOST || 'localhost',
       username: process.env.DB_USER || 'postgres',
       password: process.env.DB_PASS || 'root',
-      database: process.env.DB_NAME || 'postgres',
+      database: process.env.DB_NAME || 'aw',
       port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 5432,
       logging: 'all',
       logger: 'file', // Removes console logging, instead logs all queries in a file ormlogs.log

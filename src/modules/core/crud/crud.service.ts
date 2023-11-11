@@ -1,4 +1,4 @@
-import { BaseEntity } from '../entities';
+import { BaseEntity } from '../entities/internal';
 import { ICrudService } from './icrud.service';
 import {
   DeepPartial,

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Role } from '../../core/entities';
+import { Role } from '../../core/entities/internal';
 import {
   IsRoleAlreadyExistConstraint,
   IsRoleShouldExistConstraint,

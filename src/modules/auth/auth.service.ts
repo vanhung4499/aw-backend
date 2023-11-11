@@ -15,6 +15,7 @@ import {
   IAuthResponse,
   IChangePasswordRequest,
   IPasswordReset,
+  IResetPasswordRequest,
   IRolePermission,
   IUser,
   IUserLoginInput,
@@ -25,7 +26,6 @@ import * as bcrypt from 'bcrypt';
 import { RequestContext } from '../core';
 import { JsonWebTokenError, JwtPayload, sign, verify } from 'jsonwebtoken';
 import { ConfigService, environment } from '../../config';
-import { IResetPasswordRequest } from '../../models';
 import {
   PasswordResetCreateCommand,
   PasswordResetGetCommand,
@@ -68,6 +68,7 @@ export class AuthService {
         where: {
           email,
           isActive: true,
+          isArchived: false,
         },
         relations: {
           role: true,
@@ -345,8 +346,7 @@ export class AuthService {
       } else {
         payload.role = null;
       }
-      const accessToken = sign(payload, environment.JWT_SECRET, {});
-      return accessToken;
+      return sign(payload, environment.JWT_SECRET, {});
     } catch (error) {
       console.log('Error while getting jwt access token', error);
     }

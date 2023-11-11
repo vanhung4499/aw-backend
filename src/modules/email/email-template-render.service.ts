@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import * as Handlebars from 'handlebars';
 import { IEmailTemplate, IVerifySMTPTransport } from '../../models';
 import { ISMTPConfig } from '../../common';
-import { EmailTemplate } from '../core/entities';
+import { EmailTemplate } from '../core/entities/internal';
 import { SMTPUtils } from './utils';
 
 @Injectable()

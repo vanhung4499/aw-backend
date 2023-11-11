@@ -1,4 +1,4 @@
-import { BaseEntity } from '../core/entities';
+import { BaseEntity } from '../core/entities/internal';
 import { IRole, IRolePermission, RolesEnum } from '../../models';
 import { Column, Entity, Index, OneToMany } from 'typeorm';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';

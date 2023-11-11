@@ -7,7 +7,7 @@ import {
   ValidatorConstraintInterface,
 } from 'class-validator';
 import { IRole } from '../../../../models';
-import { Role } from '../../../core/entities';
+import { Role } from '../../../core/entities/internal';
 
 /**
  * Role should existed validation constraint

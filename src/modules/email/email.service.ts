@@ -6,7 +6,7 @@ import { IUser, EmailTemplateEnum } from '../../models';
 import { ConfigService, environment as env } from '../../config';
 import { deepMerge, IAppIntegrationConfig } from '../../common';
 import { EmailSendService } from './email-send.service';
-import { EmailTemplate } from '../core/entities';
+import { EmailTemplate } from '../email-template';
 
 const DISALLOW_EMAIL_SERVER_DOMAIN: string[] = ['@example.com'];
 
@@ -25,10 +25,7 @@ export class EmailService {
    * @param user
    * @param integration
    */
-  async welcomeUser(
-    user: IUser,
-    integration?: IAppIntegrationConfig,
-  ) {
+  async welcomeUser(user: IUser, integration?: IAppIntegrationConfig) {
     /**
      * Override the default config by merging in the provided values.
      *

@@ -1,8 +1,7 @@
 import { Column, Entity, Index, ManyToOne, RelationId } from 'typeorm';
-import { BaseEntity } from '../core/entities/base.entity';
+import { BaseEntity, Role } from '../core/entities/internal';
 import { IRolePermission, PermissionsEnum } from '../../models';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Role } from '../role/role.entity';
 
 @Entity('role_permission')
 export class RolePermission extends BaseEntity implements IRolePermission {

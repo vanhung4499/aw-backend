@@ -1,9 +1,9 @@
 import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
-import { IsEmail, IsOptional, IsString, Length } from 'class-validator';
+import { IsEmail, IsOptional, IsString } from 'class-validator';
 import { IRole, IUser } from '../../models';
-import { BaseEntity, Role } from '../core/entities';
+import { BaseEntity, Role } from '../core/entities/internal';
 
 @Entity('user')
 export class User extends BaseEntity implements IUser {
@@ -27,18 +27,6 @@ export class User extends BaseEntity implements IUser {
   @Index()
   @Column({ nullable: true })
   phoneNumber?: string;
-
-  @Length(8, 30)
-  @IsString()
-  @ApiProperty({
-    example: '12345678',
-    description: 'user password',
-    minLength: 8,
-    maxLength: 30,
-    type: String,
-  })
-  @Column('varchar', { length: 30, nullable: true })
-  password?: string | null;
 
   @ApiPropertyOptional({ type: () => String })
   @IsOptional()

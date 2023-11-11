@@ -1,22 +1,22 @@
-import { INestApplication } from '@nestjs/common';
-import { NestFactory, Reflector } from '@nestjs/core';
-import { NestExpressApplication } from '@nestjs/platform-express';
-import { useContainer } from 'class-validator';
-import * as expressSession from 'express-session';
-import helmet from 'helmet';
-import * as chalk from 'chalk';
-import { join } from 'path';
-import { urlencoded, json } from 'express';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { IConfig } from '../../common';
-import { getConfig, setConfig, environment as env } from '../../config';
-import { AuthGuard } from '../shared';
-import { SharedModule } from '../shared';
+import { INestApplication, Type } from "@nestjs/common";
+import { NestFactory, Reflector } from "@nestjs/core";
+import { NestExpressApplication } from "@nestjs/platform-express";
+import { useContainer } from "class-validator";
+import * as expressSession from "express-session";
+import helmet from "helmet";
+import * as chalk from "chalk";
+import { join } from "path";
+import { json, urlencoded } from "express";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { IConfig } from "../../common";
+import { environment as env, getConfig, setConfig } from "../../config";
+import { AuthGuard, SharedModule } from "../shared";
+import { coreEntities } from "../core/entities";
 
 export async function bootstrap(
   pluginConfig?: Partial<IConfig>,
 ): Promise<INestApplication> {
-  const config = await registerPluginConfig(pluginConfig);
+  const config = await registerConfig(pluginConfig);
 
   const { BootstrapModule } = await import('./bootstrap.module');
   const app = await NestFactory.create<NestExpressApplication>(
@@ -97,11 +97,9 @@ export async function bootstrap(
 /**
  * Setting the global config must be done prior to loading the Bootstrap Module.
  */
-export async function registerPluginConfig(
-  pluginConfig: Partial<IConfig>,
-) {
-  if (Object.keys(pluginConfig).length > 0) {
-    setConfig(pluginConfig);
+export async function registerConfig(config: Partial<IConfig>) {
+  if (Object.keys(config).length > 0) {
+    setConfig(config);
   }
 
   /**
@@ -119,8 +117,27 @@ export async function registerPluginConfig(
     ),
   );
 
-  const registeredConfig = getConfig();
-  return registeredConfig;
+  /**
+   * Registered core & plugins entities
+   */
+  const entities = await registerAllEntities(config);
+  setConfig({
+    dbConnectionOptions: {
+      entities,
+    },
+  });
+
+  return getConfig();
+}
+
+
+/**
+ * Returns an array of core entities and any additional entities defined in plugins.
+ */
+export async function registerAllEntities(
+  pluginConfig: Partial<IConfig>
+) {
+  return coreEntities as Array<Type<any>>;
 }
 
 /**

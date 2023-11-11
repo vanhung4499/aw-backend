@@ -7,7 +7,7 @@ import {
   ValidatorConstraintInterface,
 } from 'class-validator';
 import { isEmpty } from '../../../../common';
-import { Role } from '../../../core/entities';
+import { Role } from '../../../role/role.entity';
 
 /**
  * Role already existed validation constraint

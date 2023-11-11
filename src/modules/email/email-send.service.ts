@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import * as Email from 'email-templates';
 import { ISMTPConfig } from '../../common';
 import { IVerifySMTPTransport } from '../../models';
-import { EmailTemplate } from '../core/entities';
+import { EmailTemplate } from '../email-template';
 import { SMTPUtils } from './utils';
 import { EmailTemplateRenderService } from './email-template-render.service';
 

@@ -48,6 +48,7 @@ export const PermissionGroups = {
     PermissionsEnum.CHANGE_ROLES_PERMISSIONS,
     PermissionsEnum.FILE_STORAGE_VIEW,
     PermissionsEnum.ADMIN_EDIT,
+    PermissionsEnum.ACCESS_DELETE_ACCOUNT,
     PermissionsEnum.VIEW_ALL_EMAIL_TEMPLATES,
   ],
 };

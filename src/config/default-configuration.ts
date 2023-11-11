@@ -16,26 +16,15 @@ let assetPath;
 let assetPublicPath;
 
 console.log('Default Config -> __dirname: ' + __dirname);
-console.log('Plugin Config -> process.cwd: ' + process.cwd());
-
-// TODO: maybe better to use process.cwd() instead of __dirname?
 
 // for Docker
 if (__dirname.startsWith('/srv/aw')) {
-  assetPath = '/srv/aw/apps/api/src/assets';
-  assetPublicPath = '/srv/aw/apps/api/public';
+  assetPath = '/srv/aw/assets';
+  assetPublicPath = '/srv/aw/public';
 } else {
-  assetPath = path.join(
-    path.resolve(
-      __dirname,
-      '../../../',
-      ...['apps', 'api', 'src', 'assets']
-    )
-  );
+  assetPath = path.join(path.resolve(__dirname, '../', ...['assets']));
 
-  assetPublicPath = path.join(
-    path.resolve(__dirname, '../../../', ...['apps', 'api', 'public'])
-  );
+  assetPublicPath = path.join(path.resolve(__dirname, '../', ...['public']));
 }
 
 console.log('Default Config -> assetPath: ' + assetPath);
@@ -62,5 +51,5 @@ export const defaultConfiguration: IConfig = {
   assetOptions: {
     assetPath: assetPath,
     assetPublicPath: assetPublicPath,
-  }
+  },
 };

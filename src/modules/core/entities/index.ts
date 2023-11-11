@@ -1,9 +1,15 @@
-// base abstract entities
-export * from './base.entity';
+import {
+  User,
+  Role,
+  RolePermission,
+  PasswordReset,
+  EmailTemplate,
+} from './internal';
 
-//core entities
-export * from '../../password-reset/password-reset.entity';
-export * from '../../role-permission/role-permission.entity';
-export * from '../../role/role.entity';
-export * from '../../user/user.entity';
-export * from '../../email-template/email-template.entity';
+export const coreEntities = [
+  User,
+  Role,
+  RolePermission,
+  PasswordReset,
+  EmailTemplate,
+];

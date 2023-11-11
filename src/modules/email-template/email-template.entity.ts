@@ -1,5 +1,5 @@
 import { Column, Entity, Index } from 'typeorm';
-import { BaseEntity } from '../core/entities';
+import { BaseEntity } from '../core/entities/internal';
 import { IEmailTemplate } from '../../models';
 import { ApiProperty } from '@nestjs/swagger';
 

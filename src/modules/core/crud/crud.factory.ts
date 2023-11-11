@@ -1,4 +1,4 @@
-import { BaseEntity } from '../entities';
+import { BaseEntity } from '../entities/internal';
 import {
   Body,
   Delete,

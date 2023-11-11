@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { UUIDValidationPipe } from '../../shared';
 import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { BaseEntity } from '../entities';
+import { BaseEntity } from '../entities/internal';
 import { ICrudService } from './icrud.service';
 import { DeepPartial, FindOptionsWhere } from 'typeorm';
 import { PaginationParams } from './pagination-params';
