@@ -1,56 +1,18 @@
-###################
-# BUILD FOR LOCAL DEVELOPMENT
-###################
-
-FROM node:20-alpine As development
-
-RUN npm -g i pnpm
-
-WORKDIR /usr/src/app
-
-COPY --chown=node:node package.json ./
-COPY --chown=node:node pnpm-lock.yaml ./
-
-RUN pnpm fetch --prod
-
-COPY --chown=node:node . .
-RUN pnpm install
-
-USER node
-
-###################
-# BUILD FOR PRODUCTION
-###################
-
-FROM node:20-alpine As build
-
-WORKDIR /usr/src/app
-
-RUN npm -g i pnpm
-
-COPY --chown=node:node package.json ./
-COPY --chown=node:node pnpm-lock.yaml ./
-
-COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
-
-COPY --chown=node:node . .
-
-RUN pnpm build
-
-ENV NODE_ENV production
-
-RUN pnpm install --prod
-
-USER node
-
-
-###################
-# PRODUCTION
-###################
-
-FROM node:20-alpine As production
-
-COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
-COPY --chown=node:node --from=build /usr/src/app/dist ./dist
-
-CMD [ "node", "dist/main.js" ]
+# Use an official Node.js
+FROM node:20-alpine
+# Set the working directory in the container
+WORKDIR /app
+# Copy package.json and pnpm-lock.yaml
+COPY pnpm-lock.yaml package.json ./
+# Install app dependencies using PNPM
+RUN npm install -g pnpm
+# Install dependencies
+RUN pnpm i
+# Copy the application code
+COPY . .
+# Build the TypeScript code
+RUN pnpm run build
+# Expose the app
+EXPOSE 3000
+# Start the application
+CMD ["pnpm", "start"]
