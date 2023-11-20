@@ -8,10 +8,8 @@ RUN npm -g i pnpm
 
 WORKDIR /usr/src/app
 
+COPY --chown=node:node package.json ./
 COPY --chown=node:node pnpm-lock.yaml ./
-
-ENV NPM_CONFIG_STORE_DIR=/pnpm
-ENV NPM_CONFIG_PACKAGE_IMPORT_METHOD=copy
 
 RUN pnpm fetch --prod
 
@@ -30,6 +28,7 @@ WORKDIR /usr/src/app
 
 RUN npm -g i pnpm
 
+COPY --chown=node:node package.json ./
 COPY --chown=node:node pnpm-lock.yaml ./
 
 COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules

@@ -47,6 +47,7 @@
     "dotenv": "^16.3.1",
     "email-templates": "^11.1.1",
     "express-session": "^1.17.3",
+    "handlebars": "^4.7.8",
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.2",
     "mjml": "^4.14.1",
