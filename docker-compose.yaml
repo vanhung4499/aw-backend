@@ -9,7 +9,7 @@ services:
         - APP_ENV
     command: npm run start:dev
     env_file:
-      - .env.compose
+      - .env
     volumes:
       - ./:/usr/src/app
     environment:
